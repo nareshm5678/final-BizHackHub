@@ -1,0 +1,295 @@
+/* General app styling */
+.App {
+  text-align: center;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url('./assets/bgimage.jpg'); /* Use your background image */
+  background-size: cover;
+  background-position: center;
+  z-index: 0; /* Ensure the background is on the lowest layer */
+}
+
+/* Timer and Scoreboard styling */
+#timer, #scoreboard {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  z-index: 10; /* Ensure these elements are above the background */
+}
+
+#timer {
+  top: 10px;
+  left: 10px;
+}
+
+#scoreboard {
+  top: 10px;
+  right: 10px;
+}
+
+/* Styling for the dialogue container */
+#dialogue-container {
+  position: absolute;
+  bottom: 75%; /* Adjust position from the bottom */
+  left: 20%; /* Center horizontally */
+  transform: translate(-50%, 0); /* Center the box */
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background for better contrast */
+  color: white;
+  padding: 10px;
+  border-radius: 12px; /* Rounded corners for a modern look */
+  width: 100px; /* Fixed square size */
+  height: 100px; /* Match height to width for square */
+  text-align: center;
+  font-size: 14px; /* Smaller font for a compact box */
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  display: flex; /* Center text inside the box */
+  align-items: center; /* Vertically align text */
+  justify-content: center; /* Horizontally align text */
+  z-index: 15; /* Ensure the dialogue box stays on top */
+}
+
+/* Owl styling */
+#owl {
+  position: absolute;
+  top: 10%; /* Adjust vertical position */
+  left: 10%; /* Adjust horizontal position */
+  cursor: pointer;
+  z-index: 10;
+  width: 8%;
+}
+
+/* Hiding objects styling (Tree, Bush, Rock) */
+.hiding-object {
+  position: absolute;
+  width: 15%; /* Increase the size of the hiding object */
+  height: auto;
+  cursor: pointer;
+  z-index: 5; /* Ensure hiding objects are above the background */
+  transition: all 0.3s ease;
+}
+
+.hiding-object:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2) contrast(1.1);
+  animation: wobble 0.5s ease-in-out;
+}
+
+@keyframes wobble {
+  0%, 100% {
+    transform: scale(1.1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+.hiding-object::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hiding-object:hover::after {
+  opacity: 1;
+  animation: glowPulse 1.5s infinite;
+}
+
+@keyframes glowPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Hidden Easter eggs styling */
+.object {
+  position: absolute;
+  width: 0.5%; /* Smaller width for the egg (even smaller) */
+  height: auto;
+  z-index: 2; /* Ensure the egg is below other elements */
+  opacity: 0.8; /* Slight transparency to blend behind the background */
+  animation: bounce 2s infinite; /* Add bounce animation */
+}
+
+/* Position adjustments for hiding objects and eggs */
+.hiding-object:nth-child(1),
+.object:nth-child(1) {
+  top: 37%; /* Position for the first object/egg */
+  left: 81%;
+}
+
+.hiding-object:nth-child(2),
+.object:nth-child(2) {
+  top: 51%; /* Position for the second object/egg */
+  left: 65%;
+}
+
+.hiding-object:nth-child(3),
+.object:nth-child(3) {
+  top: 70%; /* Position for the third object/egg */
+  left: 20%;
+}
+
+/* Styling for the start button */
+.start-button {
+  padding: 15px 40px;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96E6A1);
+  background-size: 300% 300%;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  animation: gradientShift 5s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.start-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  animation: gradientShift 3s ease infinite;
+}
+
+.start-button:active {
+  transform: translateY(1px);
+}
+
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(45deg);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: rotate(45deg) translateX(-100%);
+  }
+  to {
+    transform: rotate(45deg) translateX(100%);
+  }
+}
+
+/* Fact Container */
+#fact-container {
+  position: absolute;
+  bottom: 10%; /* Adjust this value to position the container at the top */
+  left: 80%; /* This positions the container at the center horizontally */
+  transform: translateX(-50%); /* This centers the container perfectly */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  color: white; /* Text color */
+  padding: 15px; /* Space around the text */
+  border-radius: 10px; /* Rounded corners */
+  width: 280px; /* Adjust the width as needed */
+  font-size: 16px; /* Adjust the font size for better readability */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adding shadow to create depth */
+  text-align: center; /* Center the text */
+  z-index: 10; /* Ensure it's above other elements */
+  font-family: 'Arial', sans-serif; /* Choose a simple font */
+}
+
+/* Optional: Add smooth transitions for text changes */
+#fact-text {
+  transition: opacity 0.5s ease-in-out; /* Smooth fade for changing facts */
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
