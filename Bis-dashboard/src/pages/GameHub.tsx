@@ -122,6 +122,7 @@ const GameHub = () => {
             </div>
             <div className="flex gap-4">
               <select
+                aria-label="Filter games by category"
                 className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -132,6 +133,7 @@ const GameHub = () => {
                 ))}
               </select>
               <select
+                aria-label="Filter games by difficulty"
                 className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value)}
