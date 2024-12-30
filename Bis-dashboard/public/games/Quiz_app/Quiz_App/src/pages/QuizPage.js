@@ -29,7 +29,7 @@ const QuizPage = () => {
   // Fetch quiz levels and questions from the backend
   const fetchQuizData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/quiz-levels");
+      const response = await axios.get("http://localhost:5001/api/quiz-levels");
       const quizLevels = response.data.quizLevels;
 
       // Map the data to match the frontend structure
@@ -57,7 +57,7 @@ const QuizPage = () => {
       // Send user's individual score to the backend (including the name)
       const totalScore = levelScores.reduce((acc, score) => acc + score, 0);
       
-      const response = await axios.post("http://localhost:5000/api/team-scores", {
+      const response = await axios.post("http://localhost:5001/api/team-scores", {
         teamCode,
         leaderName, // Now sending leaderName instead of leaderName
         collegeName: college,

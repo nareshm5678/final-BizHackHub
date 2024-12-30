@@ -36,7 +36,7 @@ function App() {
 
   const fetchQuiz = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/quiz/${currentLevel + 1}`);
+      const response = await axios.get(`http://localhost:5002/api/quiz/${currentLevel + 1}`);
       if (response.data.success) {
         setQuiz(response.data.question);
       } else {
@@ -80,7 +80,7 @@ function App() {
       // Wrong answer selected - trigger game over
       try {
         console.log('Saving game over with username:', username);
-        const response = await axios.post('http://localhost:5000/api/gameover', {
+        const response = await axios.post('http://localhost:5002/api/gameover', {
           timeTaken: timer.time,
           username: username
         });

@@ -33,7 +33,7 @@ function VideoPlayer() {
 
   const fetchProgress = async (categoryId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/progress/${categoryId}`);
+      const response = await fetch(`http://localhost:5003/api/progress/${categoryId}`);
       if (response.ok) {
         const data = await response.json();
         // Update video completion status based on server data
@@ -64,7 +64,7 @@ function VideoPlayer() {
     currentVideo.completed = true;
 
     try {
-      const response = await fetch('http://localhost:5000/api/progress/updateProgress', {
+      const response = await fetch('http://localhost:5003/api/progress/updateProgress', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

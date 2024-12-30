@@ -53,10 +53,10 @@ const Dashboard = () => {
   const [isTaskProcessing, setIsTaskProcessing] = useState<string | null>(null);
 
   const dailyMissions = [
-    { id: 'task1', title: 'Complete Safety Standards Quiz', points: 100, icon: Book },
-    { id: 'task2', title: 'Watch Quality Control Videos', points: 50, icon: Calendar },
-    { id: 'task3', title: 'Complete Practice Test', points: 75, icon: Target },
-    { id: 'task4', title: 'Review Documentation', points: 50, icon: Book },
+    { id: 'task1', title: 'Play Fruit Quality Inspector', points: 100, icon: Book },
+    { id: 'task2', title: 'Complete Quiz', points: 50, icon: Calendar },
+    { id: 'task3', title: 'Reach level 2 in Jigsaw', points: 75, icon: Target },
+    { id: 'task4', title: 'Complete a course', points: 300, icon: Book },
   ];
 
   useEffect(() => {
@@ -156,6 +156,21 @@ const Dashboard = () => {
         return; // Task already completed
       }
 
+      setIsTaskProcessing(taskId);
+
+      // Route to different localhost ports based on taskId
+      const portMap: { [key: string]: number } = {
+        'task1': 3000,
+        'task2': 3001,
+        'task3': 5175,
+        'task4': 5174
+      };
+
+      const port = portMap[taskId];
+      if (port) {
+        window.open(`http://localhost:${port}`, '_blank');
+      }
+
       const response = await axios.post(
         `${API_URL}/api/tasks/complete`,
         { taskId, taskTitle, points },
@@ -184,6 +199,8 @@ const Dashboard = () => {
         localStorage.removeItem('userEmail');
         window.location.href = '/login';
       }
+    } finally {
+      setIsTaskProcessing(null);
     }
   };
 
@@ -267,7 +284,7 @@ const Dashboard = () => {
                       ? 'Completed'
                       : isTaskProcessing === mission.id
                       ? 'Processing...'
-                      : 'Complete'}
+                      : 'Go to Task'}
                   </button>
                 </div>
               ))}
