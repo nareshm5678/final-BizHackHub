@@ -35,6 +35,11 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
       });
 
       if (response.data && response.data.token) {
+        // Clear any existing user data
+        localStorage.removeItem('profilePic');
+        localStorage.removeItem('username');
+        
+        // Set new user data
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userEmail', formData.email);
         
